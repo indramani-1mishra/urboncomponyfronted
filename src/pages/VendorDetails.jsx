@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { Star, Clock, Check, ChevronRight } from 'lucide-react';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,7 @@ const VendorDetails = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/categories/vendor/${vendorId}/services`).then(res => {
+        api.get(`/api/categories/vendor/${vendorId}/services`).then(res => {
             setVendor(res.data.vendor);
             setServices(res.data.services);
         });
@@ -31,7 +31,7 @@ const VendorDetails = () => {
 
         if (confirm.isConfirmed) {
             try {
-                await axios.post('http://localhost:5000/api/cart', { serviceId: service._id }, { withCredentials: true });
+                await api.post('/api/cart', { serviceId: service._id });
                 setCartCounts(prev => ({ ...prev, [service._id]: (prev[service._id] || 0) + 1 }));
                 Swal.fire({
                     icon: 'success', title: 'Package Added!', toast: true, position: 'bottom-end', showConfirmButton: false, timer: 3000
@@ -44,7 +44,7 @@ const VendorDetails = () => {
 
     const handleIncrement = async (service) => {
         try {
-            await axios.post('http://localhost:5000/api/cart', { serviceId: service._id }, { withCredentials: true });
+            await api.post('/api/cart', { serviceId: service._id });
             setCartCounts(prev => ({ ...prev, [service._id]: prev[service._id] + 1 }));
         } catch (error) { }
     };

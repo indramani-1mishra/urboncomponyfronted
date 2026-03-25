@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import { Search, ChevronDown, CheckCircle, X, Check } from 'lucide-react';
 
@@ -31,11 +31,11 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/categories').then(res => setCategories(res.data));
+        api.get('/api/categories').then(res => setCategories(res.data));
     }, []);
 
     const fetchSubcategories = (categoryId, categoryName) => {
-        axios.get(`http://localhost:5000/api/categories/${categoryId}/subcategories`).then(res => {
+        api.get(`/api/categories/${categoryId}/subcategories`).then(res => {
             setSubcategories(res.data);
             setSelectedCategory({ id: categoryId, name: categoryName });
             setVendors([]);
@@ -44,7 +44,7 @@ const Home = () => {
     };
 
     const fetchVendors = (subId, subName) => {
-        axios.get(`http://localhost:5000/api/categories/subcategory/${subId}/vendors`).then(res => {
+        api.get(`/api/categories/subcategory/${subId}/vendors`).then(res => {
             setVendors(res.data);
             setSelectedSub({ id: subId, name: subName });
         });

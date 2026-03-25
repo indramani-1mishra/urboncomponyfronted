@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
 import { Layers, Plus, ShoppingBag, Edit, Trash2 } from 'lucide-react';
@@ -28,9 +28,9 @@ const AdminDashboard = () => {
     const [serviceData, setServiceData] = useState({ name: '', price: '', description: '', includes: '', vendor: '', time: '', image: null });
 
     const fetchData = () => {
-        axios.get('http://localhost:5000/api/cart/all', { withCredentials: true }).then(res => setCarts(res.data));
-        axios.get('http://localhost:5000/api/categories').then(res => setCategories(res.data));
-        axios.get('http://localhost:5000/api/categories/vendors/all', { withCredentials: true }).then(res => setAllVendors(res.data));
+        api.get('/api/cart/all').then(res => setCarts(res.data));
+        api.get('/api/categories').then(res => setCategories(res.data));
+        api.get('/api/categories/vendors/all').then(res => setAllVendors(res.data));
     };
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
         if (catImage) formData.append('image', catImage);
 
         try {
-            await axios.post('http://localhost:5000/api/categories', formData, { withCredentials: true });
+            await api.post('/api/categories', formData);
             Swal.fire('Success', 'Category Added to Database', 'success');
             setCatName(''); setCatImage(null); fetchData();
         } catch(e) { Swal.fire('Error', 'Failed to add category', 'error'); }
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
         if (!subName || !subCatId) { return Swal.fire('Error', 'Subcategory name and parent required', 'error'); }
         setIsSubmittingSub(true);
         try {
-            await axios.post('http://localhost:5000/api/categories/subcategory', { name: subName, category: subCatId }, { withCredentials: true });
+            await api.post('/api/categories/subcategory', { name: subName, category: subCatId });
             Swal.fire('Success', 'Subcategory Added', 'success');
             setSubName('');
         } catch(e) { Swal.fire('Error', 'Failed to add subcategory', 'error'); }
@@ -80,11 +80,11 @@ const AdminDashboard = () => {
 
         try {
             if (editMode && editVendorId) {
-                await axios.put(`http://localhost:5000/api/categories/vendor/${editVendorId}`, formData, { withCredentials: true });
+                await api.put(`/api/categories/vendor/${editVendorId}`, formData);
                 Swal.fire('Success', 'Professional Info Updated', 'success');
                 setEditMode(false); setEditVendorId(null);
             } else {
-                await axios.post('http://localhost:5000/api/categories/vendor', formData, { withCredentials: true });
+                await api.post('/api/categories/vendor', formData);
                 Swal.fire('Success', 'New Professional Added', 'success');
             }
             setVendorData({ name: '', price: '', description: '', subcategory: '', image: null });
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
         if (serviceData.image) formData.append('image', serviceData.image);
 
         try {
-            await axios.post('http://localhost:5000/api/categories/service', formData, { withCredentials: true });
+            await api.post('/api/categories/service', formData);
             Swal.fire('Success', 'New Service Package Added', 'success');
             setServiceData({ name: '', price: '', description: '', includes: '', vendor: '', time: '', image: null });
             const fileInput = document.getElementById('srvImageInput');

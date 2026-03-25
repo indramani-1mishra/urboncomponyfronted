@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { ShoppingCart, Trash2 } from 'lucide-react';
 
@@ -9,7 +9,7 @@ const CartPage = () => {
 
     useEffect(() => {
         if (user) {
-            axios.get('http://localhost:5000/api/cart', { withCredentials: true })
+            api.get('/api/cart')
                 .then(res => setCart(res.data))
                 .catch(err => console.log(err));
         }
@@ -17,7 +17,7 @@ const CartPage = () => {
 
     const handleRemove = async (itemId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/cart/${itemId}`, { withCredentials: true });
+            await api.delete(`/api/cart/${itemId}`);
             setCart(prev => ({...prev, items: prev.items.filter(it => it._id !== itemId)}));
         } catch (error) {
             console.log(error);
