@@ -62,7 +62,7 @@ const VendorDetails = () => {
                 
                 {/* Left Area - Vendor Info */}
                 <div className="md:col-span-4 bg-transparent pl-4">
-                    <h1 className="text-4xl font-extrabold text-[#0f1014] mb-2">{vendor.name}</h1>
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-[#0f1014] mb-2">{vendor.name}</h1>
                     <div className="flex items-center text-sm font-bold text-gray-700 mb-6">
                         <Star className="w-4 h-4 mr-1 text-black fill-current" /> 
                         4.87 <span className="text-gray-400 font-medium ml-1">(1.1 M bookings)</span>
@@ -85,7 +85,7 @@ const VendorDetails = () => {
                             ) : (
                                 services.map(srv => (
                                     <div key={srv._id} className="py-8 first:pt-0 last:pb-0">
-                                        <div className="flex justify-between items-start mb-4">
+                                        <div className="flex justify-between items-start mb-4 gap-3">
                                             <div>
                                                 <div className="text-[10px] font-bold tracking-widest text-green-700 uppercase mb-2 flex items-center">
                                                     <span className="w-2 h-2 bg-green-700 rounded-sm inline-block mr-2"></span> PACKAGE
@@ -101,18 +101,18 @@ const VendorDetails = () => {
                                             
                                             <div className="text-center">
                                                 {srv.image && (
-                                                    <div className="w-[100px] h-[100px] bg-gray-100 rounded-lg overflow-hidden mb-[-12px] relative z-0 border border-gray-200">
+                                                    <div className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] bg-gray-100 rounded-lg overflow-hidden mb-[-12px] relative z-0 border border-gray-200">
                                                         <img src={srv.image} alt={srv.name} className="w-full h-full object-cover" />
                                                     </div>
                                                 )}
                                                 {(cartCounts[srv._id] && cartCounts[srv._id] > 0) ? (
-                                                    <div className="w-[100px] bg-white border border-gray-200 shadow-sm rounded-lg flex items-center justify-between px-2 py-1 z-10 relative mt-2">
+                                                    <div className="w-[80px] sm:w-[100px] bg-white border border-gray-200 shadow-sm rounded-lg flex items-center justify-between px-1 sm:px-2 py-1 z-10 relative mt-2 text-sm">
                                                         <button onClick={() => handleDecrement(srv._id)} className="text-blue-600 font-bold px-2 py-1 hover:bg-gray-100 rounded">-</button>
-                                                        <span className="font-bold text-blue-600 px-2">{cartCounts[srv._id]}</span>
+                                                        <span className="font-bold text-blue-600 px-1 sm:px-2">{cartCounts[srv._id]}</span>
                                                         <button onClick={() => handleIncrement(srv)} className="text-blue-600 font-bold px-2 py-1 hover:bg-gray-100 rounded">+</button>
                                                     </div>
                                                 ) : (
-                                                    <button onClick={() => handleAddToCart(srv)} className="w-[100px] bg-white text-blue-600 font-bold border border-gray-200 shadow-sm rounded-lg px-6 py-2 pb-2 z-10 hover:shadow-md transition relative mt-2 text-sm uppercase">
+                                                    <button onClick={() => handleAddToCart(srv)} className="w-[80px] sm:w-[100px] bg-white text-blue-600 font-bold border border-gray-200 shadow-sm rounded-lg px-2 sm:px-6 py-1.5 sm:py-2 z-10 hover:shadow-md transition relative mt-2 text-xs sm:text-sm uppercase">
                                                         Add
                                                     </button>
                                                 )}

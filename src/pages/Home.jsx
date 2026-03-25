@@ -102,7 +102,7 @@ const Home = () => {
                                 {!selectedSub ? (
                                     <>
                                         <p className="text-xs text-gray-400 font-bold mb-4 uppercase tracking-widest pl-1">Select a service category</p>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             {subcategories.map((sub, i) => (
                                                 <motion.div 
                                                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -177,10 +177,10 @@ const Home = () => {
                         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 gap-y-8 gap-x-4 max-w-xl text-center">
                             {categories.slice(0, 6).map((cat, i) => (
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} key={cat._id || i} onClick={() => fetchSubcategories(cat._id, cat.name)} className="flex flex-col items-center cursor-pointer group">
-                                    <div className="w-16 h-16 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-center mb-3 group-hover:bg-black transition-colors overflow-hidden p-3 shadow-sm group-hover:shadow-lg">
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-center mb-2 sm:mb-3 group-hover:bg-black transition-colors overflow-hidden p-2 sm:p-3 shadow-sm group-hover:shadow-lg">
                                         <img src={cat.image || CATEGORIES[i % CATEGORIES.length].img} alt={cat.name} className="w-full h-full object-cover rounded-xl group-hover:opacity-90" />
                                     </div>
-                                    <span className="text-xs font-bold text-gray-800 leading-tight w-24 group-hover:text-black">{cat.name}</span>
+                                    <span className="text-[10px] sm:text-xs font-bold text-gray-800 leading-tight w-20 sm:w-24 group-hover:text-black">{cat.name}</span>
                                 </motion.div>
                             ))}
                         </div>
@@ -248,8 +248,8 @@ const Home = () => {
             </div>
             
             {/* Value Props Section */}
-            <div className="max-w-7xl mx-auto px-6 py-16 mb-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center bg-white p-12 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/40">
+            <div className="max-w-7xl mx-auto px-6 py-10 sm:py-16 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center bg-white p-8 sm:p-12 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/40">
                     <div className="flex flex-col items-center">
                         <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-blue-600"><ShieldCheck className="w-8 h-8"/></div>
                         <h3 className="font-bold text-lg text-black mb-2">Verified Professionals</h3>

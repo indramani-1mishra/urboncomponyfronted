@@ -37,9 +37,9 @@ const CartPage = () => {
                 <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
                     <ul className="divide-y divide-gray-100 p-8">
                         {cart.items.map((item, idx) => (
-                            <li key={idx} className="py-6 flex justify-between items-start">
-                                <div>
-                                    <h3 className="text-lg font-bold text-gray-900 mb-1">{item.service?.name}</h3>
+                            <li key={idx} className="py-6 flex flex-col sm:flex-row justify-between items-start gap-4">
+                                <div className="flex-1">
+                                    <h3 className="text-lg font-bold text-gray-900 mb-1 leading-tight">{item.service?.name}</h3>
                                     <p className="text-sm font-medium text-gray-400 max-w-sm">{item.service?.description}</p>
                                     {item.service?.vendor && (
                                         <div className="mt-2 text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded inline-block">
@@ -47,7 +47,7 @@ const CartPage = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex items-center space-x-6">
+                                <div className="flex items-center justify-between w-full sm:w-auto sm:space-x-6 border-t sm:border-0 border-gray-100 pt-4 sm:pt-0">
                                     <span className="text-xl font-bold text-gray-900">₹{item.service?.price}</span>
                                     <button onClick={() => handleRemove(item._id)} className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition" title="Remove Item">
                                         <Trash2 className="w-5 h-5"/>
