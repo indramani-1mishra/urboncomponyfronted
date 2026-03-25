@@ -33,8 +33,8 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white text-lg font-bold mb-6">Download our App</h3>
                         <div className="space-y-4">
-                            <img src="https://images.urbancompany.com/business-web/image/upload/v1615555620/web-assets/App_store.png" alt="App Store" className="w-[150px] cursor-pointer bg-white rounded" />
-                            <img src="https://images.urbancompany.com/business-web/image/upload/v1615555621/web-assets/Play_store.png" alt="Google Play" className="w-[150px] cursor-pointer bg-white rounded" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" className="w-[150px] cursor-pointer rounded" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-[150px] cursor-pointer rounded" />
                         </div>
                     </div>
                 </div>
